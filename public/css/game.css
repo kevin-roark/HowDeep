@@ -1,0 +1,61 @@
+/*body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Oxygen', sans-serif;
+  padding-top: 40px;
+  font-size: 14px;
+  line-height: 20px;
+}*/
+
+a:link {
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+ul.artist-list {
+  list-style: none;
+  text-align: center;
+}
+
+.jumbo {
+  color: red;
+  font-size: 3em;
+  font-family: 'Leckerli One', cursive;
+  padding-bottom: 30px;
+}
+
+.main-artist-label {
+  font-size: 2.5em;
+}
+
+.main-artist-name {
+  color: green;
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.similar-artists-label {
+  font-size: 2.0em;
+}
+
+.similar-artists {
+  font-size: 1.5em;
+  color: orange;
+}

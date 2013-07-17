@@ -1,13 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html lang="en">
 <html>
   <head>
     <meta charset="UTF-8" />
-
-    <script type="text/javascript" src="../js/lastfm.api.md5.js"></script>
-    <script type="text/javascript" src="../js/lastfm.api.js"></script>
-    <script type="text/javascript" src="../js/lastfm.api.cache.js"></script>
-    <script type="text/javascript" src="../js/apikey.js"></script>
-    <script type="text/javascript" src="../js/howdeep.js"></script>
+    
+    <link href="css/toast.css" rel="stylesheet" type="text/css">
+    <link href="css/game.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Leckerli+One|Oxygen' rel='stylesheet' type='text/css'>
 
     <title>
       How deep can you go?
@@ -15,14 +13,48 @@
   </head>
 
   <body>
-
-    <h1>HOW DEEP R U</h1>
-
-    <h2 id="artist">
-    </h2>
-
-    <h4 id="similar">
-    </h4>
+  
+    <div class="container">
+      <div class="grid">
+      
+        <div class="unit span-grid">
+          <div class="jumbo">
+            HOW DEEP CAN YOU GO?
+          </div>
+        </div>
+    
+        <div class="unit two-of-five">
+          <div class="main-artist-label">
+            Current artist:
+          </div>
+        </div>
+        
+        <div class="unit three-of-five">
+          <div class="main-artist-name">
+            {{artist_name}}
+          </div>
+        </div>
+                  
+        <div class="unit two-of-five">
+          <div class="similar-artists-label">
+            Similar artists:
+          </div>
+        </div>
+    
+        <div class="unit three-of-five">
+          <div class="well similar-artists">
+            <ul class="artist-list">
+              {{#each similar_artists}}
+                <li class="artist">
+                  <a href={{url}} target="_blank">{{name}}</a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+                  
+      </div>
+    </div>
 
   </body>
 
