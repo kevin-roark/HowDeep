@@ -1,0 +1,29 @@
+<div class="unit two-of-five">
+  <div class="main-artist-label">
+    Current artist:
+  </div>
+</div>
+
+<div class="unit three-of-five">
+  <div class="main-artist-name">
+    {{artist_name}}
+  </div>
+</div>
+          
+<div class="unit two-of-five">
+  <div class="similar-artists-label">
+    Similar artists:
+  </div>
+</div>
+
+<div class="unit three-of-five">
+  <div class="well similar-artists">
+    <ul class="artist-list">
+      {{#each similar_artists}}
+        <li class="artist">
+          <a href={{url}} target="_blank">{{name}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

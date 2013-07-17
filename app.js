@@ -4,6 +4,14 @@ var consolidate = require('consolidate');
 
 var app = expressio();
 
+/* set up pre-compilation of handlebars templates.. REMOVE AFTER DEV */
+var hbsPrecompiler = require('handlebars-precompiler');
+hbsPrecompiler.watchDir(
+  __dirname + "/views",
+  __dirname + "/public/js/templates.js",
+  ['handlebars', 'hbs']
+);
+
 /* assign handlebars engine to html files */
 app.engine('html', consolidate.handlebars);
 
@@ -16,16 +24,18 @@ app.use(expressio.static(__dirname + '/public'));
 
 app.http().io();
 
-var lastfm_key = '';
-var lastfm_secret = '';
+var lastfm_key = '5daa23e1e48017196a0a2dd126107ab1';
+var lastfm_secret = '77ccbb264459e7bdeb1bf1cd8c62df96';
 
-app.get('/', function(req, res) {
-    
+/* Setup the ready route, and emit talk event. */
+app.io.route('ready', function(req) {
+  
     var lastfm_info = {};
+    get_top_artists('5');
     
-    function handle_gethyped(error, lastfm_response) {
+    function handle_artistlist(error, lastfm_response) {
       if (error) {
-        res.render('index');
+        console.log(error);
         return;
       }
       var artist_array = lastfm_response.body.artists.artist;
@@ -37,12 +47,13 @@ app.get('/', function(req, res) {
     
     function handle_similar(error, lastfm_response) {
       if (error) {
-        res.render('index', lastfm_info);
+        console.log(error);
         return;
       }
       var similar_artists = lastfm_response.body.artist.similar.artist;
       lastfm_info['similar_artists'] = similar_artists;
-      res.render('index', lastfm_info);
+      
+      req.io.emit('talk', lastfm_info);
     }
     
     function get_similar(artist) {
@@ -64,13 +75,18 @@ app.get('/', function(req, res) {
           method: "chart.gettopartists",
           api_key: lastfm_key,
           format: "json",
-          limit: "7"
+          limit: limit
         })
         .set({accept: 'application/json'})
-        .end(handle_gethyped);
+        .end(handle_artistlist);
     }
+})
+
+
+app.get('/', function(req, res) {
     
-    get_top_artists('10');
+    res.sendfile(__dirname + '/views/index.html');
+    return;
     
 })
 

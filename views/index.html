@@ -6,6 +6,12 @@
     <link href="css/toast.css" rel="stylesheet" type="text/css">
     <link href="css/game.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Leckerli+One|Oxygen' rel='stylesheet' type='text/css'>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/handlebars.runtime.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <title>
       How deep can you go?
@@ -22,35 +28,9 @@
             HOW DEEP CAN YOU GO?
           </div>
         </div>
-    
-        <div class="unit two-of-five">
-          <div class="main-artist-label">
-            Current artist:
-          </div>
-        </div>
         
-        <div class="unit three-of-five">
-          <div class="main-artist-name">
-            {{artist_name}}
-          </div>
-        </div>
-                  
-        <div class="unit two-of-five">
-          <div class="similar-artists-label">
-            Similar artists:
-          </div>
-        </div>
-    
-        <div class="unit three-of-five">
-          <div class="well similar-artists">
-            <ul class="artist-list">
-              {{#each similar_artists}}
-                <li class="artist">
-                  <a href={{url}} target="_blank">{{name}}</a>
-                </li>
-              {{/each}}
-            </ul>
-          </div>
+        <div id="test">
+          
         </div>
                   
       </div>
