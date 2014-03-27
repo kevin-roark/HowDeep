@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
 
     <link href="css/toast.css" rel="stylesheet" type="text/css">
+    <link href="css/modal.css" rel="stylesheet" type="text/css">
     <link href="css/game.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Leckerli+One|Oxygen' rel='stylesheet' type='text/css'>
 
@@ -11,6 +12,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/handlebars.runtime.js"></script>
     <script src="js/templates.js"></script>
+    <script src="js/tock.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
 
@@ -30,14 +32,35 @@
           </div>
         </div>
 
-        <div id="game">
+        <div id="howdeepapp">
+
+          <section id="clock">
+
+          </section>
+
+          <section id="end" class="game-over modal">
+
+          </section>
+
+          <section id="star">
+
+          </section>
+
+          <section>
+            <ul id="similar" class="artist-list"></ul>
+            </ul>
+          </section>
 
         </div>
 
       </div>
     </div>
 
-    <script src="js/game_io.js"></script>
+    <script>
+      var io = io.connect();
+    </script>
+    <script src="js/how_deep.js"></script>
+
 
   </body>
 
