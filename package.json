@@ -1,4 +1,4 @@
-{ 
+{
   "name": "how_deep",
   "version": "0.0.1",
   "description": "Set of realtime multiplayer last.fm based games",
@@ -7,12 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express.io": "1.1.12", 
-    "superagent": "0.14.6", 
-    "consolidate": "0.9.1", 
-    "handlebars": "1.0.12"
+    "superagent": "0.14.6",
+    "consolidate": "0.9.1",
+    "handlebars": "1.0.12",
+    "express": "3.5.1",
+    "socket.io": "1.0.0-pre"
   },
-  "repository": "", 
-  "author": "Kevin Roark", 
+  "repository": "",
+  "author": "Kevin Roark",
   "license": "BSD"
 }

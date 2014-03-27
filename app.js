@@ -1,9 +1,20 @@
-var expressio = require('express.io');
 var superagent = require('superagent');
 var consolidate = require('consolidate');
-var fm = require('tools.last.fm');
+var express = require('express');
+var fm = require('./last.fm');
 
-var app = expressio();
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+/* build the app */
+var port = process.env.PORT || 3000;
+if (process.env.IP) {
+  app.listen(port, process.env.IP);
+} else {
+  app.listen(port);
+}
+console.log('listening on *:' + port);
 
 /* set up pre-compilation of handlebars templates.. REMOVE AFTER DEV */
 var hbsPrecompiler = require('handlebars-precompiler');
@@ -13,9 +24,6 @@ hbsPrecompiler.watchDir(
   ['handlebars', 'hbs']
 );
 
-/* set up realtime io engine thing */
-app.http().io();
-
 /* assign handlebars engine to html files */
 app.engine('html', consolidate.handlebars);
 
@@ -24,32 +32,24 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 /* Set up static folder */
-app.use(expressio.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 /* set up sessions ... I'll probably use them */
-app.use(expressio.cookieParser());
-app.use(expressio.session({secret: 'totally_secret'}));
-
-
-/* set up route for home page */
-/*app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/views/index.html');
-});*/
+app.use(express.cookieParser());
+app.use(express.session({secret: 'totally_secret'}));
 
 app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/views/how_deep.html');
+  res.sendfile(__dirname + '/views/index.html');
 });
 
 /* Ready route means feed top artist! */
-app.io.route('ready', function(req) {
-  fm.get_top_artists('5', req);
-});
+io.on('connection', function(socket) {
+  socket.on('ready', function() {
+    console.log('got ready');
+  });
 
-/* Clicked a similar artist means reset artist view with new similars! */
-app.io.route('clicked_artist', function(req) {
-  var lastfm_info = req.data;
-  fm.get_artist(lastfm_info, req);
+  socket.on('clicked_artist', function() {
+    //var lastfm_info = req.data;
+    //fm.get_artist(lastfm_info, req);
+  });
 });
-
-/* build the app */
-app.listen(process.env.PORT, process.env.IP);
